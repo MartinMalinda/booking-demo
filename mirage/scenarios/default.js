@@ -1,4 +1,4 @@
-export default function(/* server */) {
+export default function( server ) {
 
   /*
     Seed your development database using your factories.
@@ -8,4 +8,12 @@ export default function(/* server */) {
   */
 
   // server.createList('post', 10);
+
+  let rentals = server.createList('rental', 10);
+
+  rentals.forEach(rental => {
+    // create bookings
+    let bookings = server.createList('booking', 10, {rentalId: rental.attrs.id});
+    rentals.bookings = bookings;
+  });
 }

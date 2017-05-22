@@ -1,0 +1,28 @@
+{{scrollLeft}}
+<div class="calendar-inner">
+  <div class="top-row">
+    <div class="day-cell"></div>
+    {{#each columnDates as |    date|}}
+      <div class="day-cell"> <b>{{moment-format date "D. MM."}}</b> </div>
+    {{/each}}
+  </div>
+  
+  <div style={{rentalsColumnStyle}} class="rentals">
+    <div class="rental"></div>
+    {{#each rentals as |rental|}}
+      
+      <div class="rental">
+        {{rental.name}} <br>
+        {{rental.dailyRate}} <small>eur / day</small>
+      </div>
+    {{/each}}
+  </div>
+
+  <div class="bookings">
+    {{#each rentals as |rental|}}
+      {{#each rental.bookings as |booking|}}
+        {{booking.clientEmail}}
+      {{/each}}
+    {{/each}}
+  </div>
+</div>
