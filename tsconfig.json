@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "noEmitOnError": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "booking-demo/tests/*": ["tests/*"],
+      "booking-demo/*": ["app/*"]
+    }
+  },
+  "include": [
+    "app/**/*",
+    "tests/**/*"
+  ]
+}

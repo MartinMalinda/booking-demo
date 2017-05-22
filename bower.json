@@ -1,0 +1,6 @@
+{
+  "name": "booking-demo",
+  "dependencies": {
+    "semantic-ui": "^2.2.10"
+  }
+}
