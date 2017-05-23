@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import BookingValidations from '../validations/booking';
 
 const {computed, inject} = Ember;
 
@@ -7,17 +8,10 @@ export default Ember.Controller.extend({
   dateHelp: inject.service(),
 
   newBooking: {},
+  BookingValidations,
 
   month: computed.alias('model.month'),
   year: computed.alias('model.year'),
-
-  newBookingDaysLength: computed('newBooking.startAt', 'newBooking.endAt', function(){
-    return this.get('dateHelp').dateDiff(this.get('newBooking.startAt'), this.get('newBooking.endAt'));
-  }),
-
-  newBookingPrice: computed('newBookingDaysLength', 'newBooking.rental', function(){
-    return this.get('newBookingDaysLength') * this.get('newBooking.rental.dailyRate');
-  }),
 
   nextMonth: computed('month', function() {
     var currentMonth = this.get('month');

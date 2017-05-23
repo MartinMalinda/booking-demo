@@ -8,54 +8,8 @@
 <div class="ui fluid container">
   <h2>Add booking</h2>
 
-  <div class="ui statistics">
-    <div class="statistic">
-      <div class="value">
-        {{newBookingDaysLength}}
-      </div>
-      <div class="label">
-        days
-      </div>
-    </div>
-    <div class="statistic">
-      <div class="value">
-       <i class="euro icon"></i> {{newBookingPrice}}
-      </div>
-      <div class="label">
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="new-booking-form ui segment">
-    <form class="ui form">
-      <div class="field">
-        <label>Email</label>
-        {{input type="email" value=newBooking.email}}
-      </div>
-      <div class="two fields">
-        <div class="field">
-          <label>From</label>
-          {{date-picker selected=newBooking.startAt onSelect=(action (mut newBooking.startAt) value="date")}}
-        </div>
-        <div class="field">
-          <label>To</label>
-          {{date-picker selected=newBooking.endAt onSelect=(action (mut newBooking.endAt) value="date")}}
-        </div>
-      </div>
-      <div class="field">
-        <label>Rental</label>
-        {{#power-select
-          onchange=(action (mut newBooking.rental))
-          selected=newBooking.rental
-          searchField="name"
-          options=model.rentals as |rental|}}
-          {{rental.name}} ({{rental.dailyRate}} EUR / day)
-        {{/power-select}}
-      </div>
-      <div class="field">
-        <button class="ui green button" type="submit">Book reservation</button>
-      </div>
-    </form>
-  </div>
+  {{new-booking-form
+    newBookingChangeset=(changeset newBooking BookingValidations)
+    rentals=model.rentals
+  }}
 </div>

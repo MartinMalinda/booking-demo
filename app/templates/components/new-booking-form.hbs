@@ -1,0 +1,64 @@
+<div class="new-booking-form ui segment">
+
+   <div class="ui statistics">
+    <div class="statistic">
+      <div class="value">
+        {{newBookingDaysLength}}
+      </div>
+      <div class="label">
+        days
+      </div>
+    </div>
+    <div class="statistic">
+      <div class="value">
+       <i class="euro icon"></i> {{newBookingPrice}}
+      </div>
+      <div class="label">
+        
+      </div>
+    </div>
+  </div>
+
+  <form {{action "submit" on="submit"}} class="ui form">
+
+    {{#if newBookingChangeset.isInvalid}}
+      <div class="ui error message">
+        <ul>
+        {{#each newBookingChangeset.errors as |error|}}
+          {{#each error.validation as |message|}}
+            <li>{{message}}</li>
+          {{/each}}
+        {{/each}}
+        </ul>
+      </div>
+    {{/if}}
+
+    <div class="field">
+      <label>Email</label>
+      {{input type="email" value=newBookingChangeset.clientEmail}}
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <label>From</label>
+        {{date-picker selected=newBookingChangeset.startAt onSelect=(action (mut newBookingChangeset.startAt) value="date")}}
+      </div>
+      <div class="field">
+        <label>To</label>
+        {{date-picker selected=newBookingChangeset.endAt onSelect=(action (mut newBookingChangeset.endAt) value="date")}}
+      </div>
+    </div>
+    <div class="field">
+      <label>Rental</label>
+      {{#power-select
+        onchange=(action (mut newBookingChangeset.rental))
+        selected=newBookingChangeset.rental
+        searchField="name"
+        options=rentals as |rental|}}
+        {{rental.name}} ({{rental.dailyRate}} EUR / day)
+      {{/power-select}}
+    </div>
+    <div class="field">
+      <button class="ui green button" type="submit">Book reservation</button>
+    </div>
+  </form>
+</div>
