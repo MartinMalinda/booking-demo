@@ -1,0 +1,13 @@
+.booking-item {
+  position: absolute;
+  height: $row-height;
+  width: $col-width;
+  top: $row-height;
+  left: $col-width;
+
+  border-bottom: 1px solid transparentize(grey, 0.5);
+  border-right: 1px solid transparentize(grey, 0.5);
+
+  word-break: break-word;
+  background: darken(white, 10%);
+}

@@ -6,6 +6,8 @@ export default Ember.Controller.extend({
 
   dateHelp: inject.service(),
 
+  newBooking: {},
+
   month: computed.alias('model.month'),
   year: computed.alias('model.year'),
 

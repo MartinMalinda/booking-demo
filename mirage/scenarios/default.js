@@ -13,7 +13,7 @@ export default function( server ) {
 
   rentals.forEach(rental => {
     // create bookings
-    let bookings = server.createList('booking', 10, {rentalId: rental.attrs.id});
+    let bookings = server.createList('booking', 2, {rentalId: rental.attrs.id});
     rentals.bookings = bookings;
   });
 }

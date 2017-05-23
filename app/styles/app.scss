@@ -2,11 +2,22 @@ $col-width: 100px;
 $row-height: 70px;
 
 
+@import "booking-item";
+@import "new-booking-form";
+
+.ui.fluid.container {
+    padding: 0 10px;
+}
+
 body {
   padding-top: 50px;
 }
 
 .calendar-area {
+    position: relative;
+}
+
+.calendar-wrap {
     overflow: auto;
 }
 
@@ -15,16 +26,6 @@ body {
     height: 800px;
     position: relative;
 }
-
-// .rental {
-//     margin:0;
-//     width:$col-width;
-//     height:$row-height;
-//     text-align:center;
-//     border-right:1px solid black;
-//     border-bottom:1px solid black;
-//     font-size:0.8em;
-// }
 
 div.columns, div.top-row {
     padding:0;
@@ -35,6 +36,7 @@ div.columns, div.top-row {
     /*background-color:white;*/
     cursor:pointer;
     height:calc(100vh - 56px);
+    border-top: 1px solid black;
 }
 div.top-row {
     height:$row-height;
@@ -58,12 +60,14 @@ div.day-cell {
     z-index:3;
     width: $col-width;
     border-right: 1px solid black;
+    border-bottom: 1px solid black;
 
     .rental {
         width: 100%;
         height: $row-height;
         position: relative;
         padding: 5px;
+        background: white;
 
         &.selected {
             // outline: 3px solid transparentize(black, 0.2);
@@ -103,3 +107,4 @@ div.day-cell {
 
     }
 }
+@import "ember-power-select";

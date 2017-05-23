@@ -13,6 +13,13 @@
   },
   "include": [
     "app/**/*",
-    "tests/**/*"
+    "tests/**/*",
+    "types/**/*"
+  ],
+  "exclude": [
+     "types/*",
+     "app/types/*",
+     "booking-demo/app/types/*",
+     "booking-demo/types/*"
   ]
 }

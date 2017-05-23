@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import * as moment from 'moment';
-import {Moment} from '../utils/moment-types';
+import moment from 'moment';
+import {Moment} from '../../types/moment-types';
 
 interface MomentRange extends Object {
   start : MomentExt,
@@ -22,16 +22,18 @@ export default Ember.Service.extend({
 
   dateDiff(date1 : Date, date2 : Date, strict : Boolean) : number {
 
-    if(date1 === date2 && strict) {
-      return 1;
-    } else {
-
+    if(!date1 || !date2){
+      return -1;
     }
 
     var mdate1 = moment(date2);
     var mdate2 = moment(date1);
 
-    return mdate1.diff(mdate2, 'days');
+    if(mdate1.isSame(mdate2)) {
+      return 1;
+    }
+
+    return mdate1.diff(mdate2, 'days') + (strict ? 1 : 0);
 
   },
 
