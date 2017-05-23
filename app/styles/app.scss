@@ -1,9 +1,22 @@
 $col-width: 100px;
 $row-height: 70px;
 
+@import "ember-basic-dropdown";
+@import "ember-power-calendar";
 
 @import "booking-item";
 @import "new-booking-form";
+
+.demo-calendar-small {
+  @include ember-power-calendar($cell-size: 30px);
+}
+
+.datepicker-demo-dropdown {
+  border: 1px solid #CCC;
+  border-radius: 4px;
+  box-shadow: rgba(0,0,0,.172549) 0 6px 12px 0;
+}
+
 
 .ui.fluid.container {
     padding: 0 10px;

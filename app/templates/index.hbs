@@ -8,7 +8,7 @@
 <div class="ui fluid container">
   <h2>Add booking</h2>
 
-  <div class="new-booking-form">
+  <div class="new-booking-form ui segment">
     <form  class="ui form">
       <div class="field">
         <label>Email</label>
@@ -17,11 +17,11 @@
       <div class="two fields">
         <div class="field">
           <label>From</label>
-          {{date-picker}}
+          {{date-picker selected=newBooking.startAt onSelect=(action (mut newBooking.startAt) value="date")}}
         </div>
         <div class="field">
           <label>To</label>
-          {{date-picker}}
+          {{date-picker selected=newBooking.endAt onSelect=(action (mut newBooking.endAt) value="date")}}
         </div>
       </div>
       <div class="field">
