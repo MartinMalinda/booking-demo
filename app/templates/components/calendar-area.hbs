@@ -4,7 +4,7 @@
     
     <div class="rental">
       {{rental.name}} <br>
-      {{rental.dailyRate}} <small>eur / day</small>
+      {{rental.dailyRate}} <small>eur / night</small>
     </div>
   {{/each}}
 </div>
@@ -29,7 +29,7 @@
             rentalIndex=(index-of rentals rental)
             minDate=columnDates.firstObject
             maxDate=columnDates.lastObject
-            daysLength=booking.daysLength
+            nightsLength=booking.nightsLength
           }}
         {{/each}}
       {{/each}}

@@ -1,10 +1,10 @@
 <div class="new-booking-form ui segment">
 
    <div class="ui statistics">
-   {{#if (gt newBookingDaysLength 0)}}
+   {{#if (gt newBookingnightsLength 0)}}
     <div class="statistic">
       <div class="value">
-        {{newBookingDaysLength}}
+        {{newBookingnightsLength}}
       </div>
       <div class="label">
         days
@@ -68,7 +68,7 @@
         selected=newBookingChangeset.rental
         searchField="name"
         options=rentals as |rental|}}
-        {{rental.name}} ({{rental.dailyRate}} EUR / day)
+        {{rental.name}} ({{rental.dailyRate}} EUR / night)
       {{/power-select}}
     </div>
     <div class="field">

@@ -1,7 +1,5 @@
 import areRangesOverlapping from 'npm:date-fns/are_ranges_overlapping';
 
-
-
 export default (rental, params, schema) => {
 
   const bookings = rental.bookings.models;

@@ -20,8 +20,8 @@ export default Ember.Component.extend({
     return this.get('rentalIndex') * ROW_HEIGHT;
   }),
 
-  width: computed('daysLength', function(){
-    return this.get('daysLength') * COL_WIDTH;
+  width: computed('nightsLength', function(){
+    return this.get('nightsLength') * COL_WIDTH;
   }),
 
   style: computed('x', 'width', function(){

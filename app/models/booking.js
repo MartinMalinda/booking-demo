@@ -15,7 +15,7 @@ export default DS.Model.extend({
 
   rental: belongsTo(),
 
-  daysLength: computed('startAt', 'endAt', function(){
+  nightsLength: computed('startAt', 'endAt', function(){
     // return moment(this.get('endAt')).diff(this.get('startAt'), 'days');
     return this.get('dateHelp').dateDiff(this.get('startAt'), this.get('endAt'), true);
   }),

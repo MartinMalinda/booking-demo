@@ -6,12 +6,12 @@ export default Ember.Component.extend({
 
   dateHelp: inject.service(),
 
-  newBookingDaysLength: computed('newBookingChangeset.startAt', 'newBookingChangeset.endAt', function(){
+  newBookingnightsLength: computed('newBookingChangeset.startAt', 'newBookingChangeset.endAt', function(){
     return this.get('dateHelp').dateDiff(this.get('newBookingChangeset.startAt'), this.get('newBookingChangeset.endAt'));
   }),
 
-  newBookingPrice: computed('newBookingDaysLength', 'newBookingChangeset.rental', function(){
-    return this.get('newBookingDaysLength') * this.get('newBookingChangeset.rental.dailyRate');
+  newBookingPrice: computed('newBookingnightsLength', 'newBookingChangeset.rental', function(){
+    return this.get('newBookingnightsLength') * this.get('newBookingChangeset.rental.dailyRate');
   }),
 
   actions: {

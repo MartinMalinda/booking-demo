@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import config from 'booking-demo/config/environment';
 import hasOverlap from './utils/has-overlap';
+import calcBookingPrice from './utils/calc-booking-price';
 import Response from 'ember-cli-mirage/response';
 
 const {inflector} = Ember.Inflector;
@@ -40,6 +41,10 @@ export default function() {
       const rentalId = params.rentalId;
       const rental = schema.find('rental', rentalId);
       if(!hasOverlap(rental, params, schema)){
+
+        params.price = calcBookingPrice(params, rental);
+
+
         return schema.create(endpoint, params).save();
       } else {
         return new Response(422, { 'Content-Type': 'application/json' }, {
