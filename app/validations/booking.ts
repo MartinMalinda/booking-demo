@@ -9,25 +9,25 @@ import { validate } from 'ember-validators';
 
 import moment from 'moment';
 
-const validateChronology = () => {
+const validateChronology = ({message}) => {
   return (key, newValue, oldValue, changes, content) => {
     let date = moment(newValue);
-    return date.isSame(changes.startAt) || date.isAfter(changes.startAt);
+    return date.isSame(changes.startAt) || date.isAfter(changes.startAt) || message;
   };
 };
 
 export default {
   startAt: [
-    validatePresence(true),
+    validatePresence({presence: true, message: '{description} cannot be blank'}),
   ],
   endAt: [
-    validatePresence(true),
-    validateChronology()
+    validatePresence({presence: true, message: '{description} cannot be blank'}),
+    validateChronology({message: 'Dates must be chronological'})
   ],
   clientEmail: [
-    validatePresence(true)
+    validatePresence({presence: true, message: '{description} cannot be blank'})
   ],
   rental: [
-    validatePresence(true)
+    validatePresence({presence: true, message: '{description} cannot be blank'})
   ]
 }
