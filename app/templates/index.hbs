@@ -6,8 +6,6 @@
 {{calendar-area columnDates=columnDates rentals=model.rentals}}
 
 <div class="ui fluid container">
-  <h2>Add booking</h2>
-
   {{new-booking-form
     newBookingChangeset=(changeset newBooking BookingValidations)
     rentals=model.rentals

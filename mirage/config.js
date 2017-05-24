@@ -2,13 +2,20 @@ import Ember from 'ember';
 import config from 'booking-demo/config/environment';
 import hasOverlap from './utils/has-overlap';
 import calcBookingPrice from './utils/calc-booking-price';
+import authOnly from './utils/auth-only';
 import Response from 'ember-cli-mirage/response';
 
 const {inflector} = Ember.Inflector;
 
+export const token = 'tomster';
+
 export default function() {
 
-  this.namespace = config.rootURL === '/' ? '' : config.rootURL;   
+  this.namespace = config.rootURL === '/' ? '' : config.rootURL;
+
+  this.get('/getToken', () => {
+    return {token};
+  });   
 
   const endpoints = ['booking', 'rental'];
 
@@ -16,7 +23,7 @@ export default function() {
     const plural = inflector.pluralize(endpoint);
 
     // findAll
-    this.get(`/${plural}`, (schema, request) => {
+    this.get(`/${plural}`, authOnly((schema, request) => {
 
       const params = Object.keys(request.queryParams);
       if(params.length === 0){
@@ -28,15 +35,15 @@ export default function() {
         return schema[plural].find(request.queryParams['ids']);
       }
       return schema[plural].where(request.queryParams);
-    });
+    }));
 
     // findOne
-    this.get(`/${plural}/:id`, (schema, {params: {id: id}}) => {
+    this.get(`/${plural}/:id`, authOnly((schema, {params: {id: id}}) => {
       return schema[plural].find(id);
-    });
+    }));
 
     // save
-    this.post(`/${plural}`, function(schema, request) {
+    this.post(`/${plural}`, authOnly(function(schema, request) {
       const params = this.normalizedRequestAttrs();
       const rentalId = params.rentalId;
       const rental = schema.find('rental', rentalId);
@@ -55,12 +62,12 @@ export default function() {
           }]
         });
       }
-    });
+    }));
 
     // delete
-    this.delete(`/${plural}/:id`, (schema, {params: {id: id}}) => {
+    this.delete(`/${plural}/:id`, authOnly((schema, {params: {id: id}}) => {
       return schema[plural].find(id).destroy();
-    });
+    }));
   });
 
 }
