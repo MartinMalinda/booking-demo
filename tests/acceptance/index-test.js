@@ -17,16 +17,16 @@ const clickDatePicker = (selector, value) => {
   });
 };
 
-const fillInBookingForm = () => {
+const fillInBookingForm = (startAt, endAt, optionIndex) => {
   run(() => {
     fillIn('.email', 'malindacz@gmail.com');
   });
 
-  clickDatePicker('.startAt', '2017-05-01');
-  clickDatePicker('.endAt', '2017-05-31');
+  clickDatePicker('.startAt', startAt);
+  clickDatePicker('.endAt', endAt);
 
   run(() => {
-    selectChoose('.new-booking-form', '.ember-power-select-option', 0); // Select the 4th image
+    selectChoose('.new-booking-form', '.ember-power-select-option', optionIndex); // Select the 4th image
   });
 
   run(() => {
@@ -34,7 +34,7 @@ const fillInBookingForm = () => {
   });
 }
 
-test('visiting /index', function(assert) {
+test('fill in booking form, test overlap at /index', function(assert) {
   
   defaultScenario(server);
 
@@ -43,18 +43,29 @@ test('visiting /index', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/');
 
-    fillInBookingForm();
+    fillInBookingForm('2017-05-01', '2017-05-31', 0);
   });
 
   andThen(() => {
     assert.equal(find('.new-booking-form .error.message').length, 0, 'There is no error message after first form submission');
-    fillInBookingForm();
+    fillInBookingForm('2017-05-01', '2017-05-31', 0);
+  });
+});
+
+test('one day overlap', function(assert) {
+  
+  defaultScenario(server);
+
+  visit('/');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/');
+
+    fillInBookingForm('2017-05-01', '2017-05-02', 0);
   });
 
   andThen(() => {
-    // pauseTest();
-    assert.equal(find('.new-booking-form .error.message').length, 1, 'There is just one error message after second submission'); //bookings overlap
-    
-
+    assert.equal(find('.new-booking-form .error.message').length, 0, 'There is no error message after first form submission');
+    fillInBookingForm('2017-05-01', '2017-05-02', 0);
   });
 });

@@ -12,7 +12,7 @@ import moment from 'moment';
 const validateChronology = ({message}) => {
   return (key, newValue, oldValue, changes, content) => {
     let date = moment(newValue);
-    return date.isSame(changes.startAt) || date.isAfter(changes.startAt) || message;
+    return date.isAfter(changes.startAt) || message;
   };
 };
 

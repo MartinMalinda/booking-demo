@@ -16,7 +16,7 @@ export default Ember.Service.extend({
     var mdate1 = moment(date2);
     var mdate2 = moment(date1);
 
-    if(mdate1.isSame(mdate2)) {
+    if(mdate1.isSame(mdate2) && strict) {
       return 1;
     }
 

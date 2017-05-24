@@ -9,7 +9,9 @@ export default Factory.extend({
   },
 
   endAt() {
-    return faker.date.between(this.startAt, endDate);
+    const newDate = new Date(this.startAt);
+    newDate.setDate(newDate.getDate() + 1);
+    return faker.date.between(newDate, endDate);
   },
 
   clientEmail() {

@@ -68,6 +68,7 @@ export default Ember.Controller.extend({
       }, errorResponse => {
         changeset.restore(snapshot);
         changeset.pushErrors('endAt', errorResponse.errors.mapBy('description'));
+        newBooking.rollbackAttributes();
       });
     }
   }
