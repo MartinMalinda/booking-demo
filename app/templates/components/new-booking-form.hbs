@@ -1,6 +1,7 @@
 <div class="new-booking-form ui segment">
 
    <div class="ui statistics">
+   {{#if (gt newBookingDaysLength 0)}}
     <div class="statistic">
       <div class="value">
         {{newBookingDaysLength}}
@@ -9,14 +10,16 @@
         days
       </div>
     </div>
-    <div class="statistic">
-      <div class="value">
-       <i class="euro icon"></i> {{newBookingPrice}}
+    {{/if}}
+    {{#if newBookingPrice}}
+      <div class="statistic">
+        <div class="value">
+         <i class="euro icon"></i> {{newBookingPrice}}
+        </div>
+        <div class="label">
+        </div>
       </div>
-      <div class="label">
-        
-      </div>
-    </div>
+    {{/if}}
   </div>
 
   <form {{action "submit" on="submit"}} class="ui form">

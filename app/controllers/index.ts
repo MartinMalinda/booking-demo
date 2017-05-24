@@ -57,4 +57,15 @@ export default Ember.Controller.extend({
 
     return columns;
   }),
+
+  actions: {
+    saveBooking() {
+      // Changeset has applied changes to the newBooking object
+      let newBooking = this.store.createRecord('booking', this.get('newBooking')).save().then(() => {
+        this.set('newBooking', {});
+      }, error => {
+        debugger;
+      });
+    }
+  }
 });

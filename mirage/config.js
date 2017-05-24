@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import config from 'booking-demo/config/environment';
+import hasOverlap from './utils/has-overlap';
+import { JSONAPISerializer } from 'ember-cli-mirage';
 
 const {inflector} = Ember.Inflector;
 
@@ -7,14 +9,14 @@ export default function() {
 
   this.namespace = config.rootURL === '/' ? '' : config.rootURL;   
 
-  let endpoints = ['booking', 'rental'];
+  const endpoints = ['booking', 'rental'];
 
   endpoints.forEach(endpoint => {
-    let plural = inflector.pluralize(endpoint);
+    const plural = inflector.pluralize(endpoint);
 
     // findAll
     this.get(`/${plural}`, (schema, request) => {
-      let params = Object.keys(request.queryParams);
+      const params = Object.keys(request.queryParams);
       if(params.length === 0){
         return schema[plural].all();
       }
@@ -29,6 +31,16 @@ export default function() {
     // findOne
     this.get(`/${plural}/:id`, (schema, {params: {id: id}}) => {
       return schema[plural].find(id);
+    });
+
+    // save
+    this.post(`/${plural}`, function(schema, request) {
+      const params = this.normalizedRequestAttrs();
+      const rentalId = params.rentalId;
+      const rental = schema.find('rental', rentalId);
+      if(!hasOverlap(rental, params, schema)){
+        return schema.create(endpoint, params).save();
+      }
     });
 
     // delete

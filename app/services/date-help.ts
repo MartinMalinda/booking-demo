@@ -2,18 +2,6 @@ import Ember from 'ember';
 import moment from 'moment';
 import {Moment} from '../../types/moment-types';
 
-interface MomentRange extends Object {
-  start : MomentExt,
-  end : MomentExt,
-  overlaps : Function,
-  intersect: Function,
-
-};
-
-interface MomentExt extends Moment {
-  range() : MomentRange
-}
-
 export default Ember.Service.extend({
 
   getDaysInMonth(month : number, year : number) : number {
@@ -51,43 +39,7 @@ export default Ember.Service.extend({
 
     return dates;
 
-  },
-
-  overlaps(range1 : MomentRange, range2 : MomentRange) : Boolean {
-    var overlap = range1.overlaps(range2);
-    if(!overlap){
-      return (this.rangesCollideOnFirstDay(range1, range2) || this.rangesCollideOnLastDay(range1, range2));
-    } else {
-      return overlap;
-    }
-
-  },
-
-  rangesCollideOnFirstDay(range1 : MomentRange, range2 : MomentRange) : Boolean {
-    return (range1.start.isSame(range2.end));
-  },
-
-  rangesCollideOnLastDay(range1 : MomentRange, range2 : MomentRange) : Boolean {
-    return (range1.end.isSame(range2.end));
-  },
-
-  intersect(range1 : MomentRange, range2 : MomentRange) : MomentRange {
-
-    var intersect = range1.intersect(range2);
-
-    if(!intersect){
-
-      if(this.rangesCollideOnFirstDay){
-        return moment.range(range1.start, range1.start);
-      }
-      if(this.rangesCollideOnLastDay){
-        return moment.range(range1.end, range1.end);
-      }
-
-      return null;
-      
-    } else {
-      return intersect;
-    }
   }
+
+
 });

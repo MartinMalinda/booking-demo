@@ -11,5 +11,6 @@
   {{new-booking-form
     newBookingChangeset=(changeset newBooking BookingValidations)
     rentals=model.rentals
+    onSuccess=(action "saveBooking")
   }}
 </div>

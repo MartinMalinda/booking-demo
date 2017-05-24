@@ -18,8 +18,11 @@ export default Ember.Component.extend({
     submit() {
       let changeset = this.get('newBookingChangeset');
       changeset.validate().then(result => {
-        changeset.get('isInvalid');
-        debugger;
+        if(changeset.get('isValid')){
+          changeset.save().then(changeset => {
+            this.attrs.onSuccess();
+          });
+        }
       });
     }
   },
