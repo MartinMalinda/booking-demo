@@ -3,7 +3,10 @@
     Your rentals
   </h1>
 </div>
-{{calendar-area columnDates=columnDates rentals=model.rentals}}
+{{calendar-area
+  columnDates=columnDates
+  rentals=model.rentals
+  onBookingItemClick=(action "transitionToBookingDetail")}}
 
 <div class="ui fluid container">
   {{new-booking-form
@@ -13,3 +16,5 @@
     serverErrors=serverErrors
   }}
 </div>
+
+{{outlet}}

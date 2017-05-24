@@ -71,6 +71,10 @@ export default Ember.Controller.extend({
         changeset.pushErrors('endAt', errorResponse.errors.mapBy('description'));
         newBooking.rollbackAttributes();
       });
+    },
+
+    transitionToBookingDetail(booking) {
+      this.transitionToRoute('index.booking-detail', booking);
     }
   }
 });

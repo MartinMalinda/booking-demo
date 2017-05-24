@@ -4,6 +4,9 @@ $row-height: 70px;
 @import "ember-basic-dropdown";
 @import "ember-power-calendar";
 
+@import "ember-modal-dialog/ember-modal-structure";
+@import "ember-modal-dialog/ember-modal-appearance";
+
 @import "booking-item";
 @import "new-booking-form";
 

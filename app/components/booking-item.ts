@@ -27,4 +27,8 @@ export default Ember.Component.extend({
   style: computed('x', 'width', function(){
     return Ember.String.htmlSafe(`width:${this.get('width')}px;transform:translate(${this.get('x')}px, ${this.get('y')}px)`);
   }),
+
+  click() {
+    this.attrs.onClick();
+  }
 });
