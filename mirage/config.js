@@ -30,9 +30,9 @@ export default function() {
         return schema[plural].all();
       }
 
-      if(params[0] === 'ids'){
+      if(params[0] === 'filter[id]'){
         // coalesce find requests
-        return schema[plural].find(request.queryParams['ids']);
+        return schema[plural].find(request.queryParams['filter[id]'].split(','));
       }
       return schema[plural].where(request.queryParams);
     }));

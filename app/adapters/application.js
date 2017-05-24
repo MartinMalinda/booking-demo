@@ -6,6 +6,8 @@ const {inject,computed} = Ember;
 export default DS.JSONAPIAdapter.extend({
 
   session: inject.service(),
+  
+  coalesceFindRequests: true,
 
   headers: computed('session.token', function(){
     return {
