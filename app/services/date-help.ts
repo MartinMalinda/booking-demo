@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import moment from 'moment';
-import {Moment} from '../../types/moment-types';
 
 export default Ember.Service.extend({
 

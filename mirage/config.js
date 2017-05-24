@@ -16,6 +16,7 @@ export default function() {
 
     // findAll
     this.get(`/${plural}`, (schema, request) => {
+
       const params = Object.keys(request.queryParams);
       if(params.length === 0){
         return schema[plural].all();
@@ -41,7 +42,6 @@ export default function() {
       if(!hasOverlap(rental, params, schema)){
         return schema.create(endpoint, params).save();
       } else {
-        debugger;
         return new Response(422, { 'Content-Type': 'application/json' }, {
           errors: [{
             'status': 422,

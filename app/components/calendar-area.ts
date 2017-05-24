@@ -10,20 +10,4 @@ export default Ember.Component.extend({
     let scrollLeft = this.get('scrollLeft');
     return Ember.String.htmlSafe(`transform: translateX(${scrollLeft}px)`);
   }),
-
-  didInsertElement() : void {
-
-    // this.element.addEventListener('scroll', () => {
-    //   this.set('scrollLeft', this.element.scrollLeft);
-    // });
-
-      this.setRentalColumnPosition();
-  },
-
-  setRentalColumnPosition() {
-    requestAnimationFrame(() => {
-      this.set('scrollLeft', this.element.scrollLeft);
-      this.setRentalColumnPosition();
-    });
-  }
 });

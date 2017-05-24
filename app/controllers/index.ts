@@ -60,13 +60,14 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    saveBooking() {
+    saveBooking(changeset, snapshot) {
       // Changeset has applied changes to the newBooking object
       let newBooking = this.store.createRecord('booking', this.get('newBooking')).save().then(() => {
         this.set('newBooking', {});
         this.set('serverErrors', []);
       }, errorResponse => {
-        this.set('serverErrors', errorResponse.errors);
+        changeset.restore(snapshot);
+        changeset.pushErrors('endAt', errorResponse.errors.mapBy('description'));
       });
     }
   }

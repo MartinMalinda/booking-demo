@@ -11,9 +11,11 @@ export default function( server ) {
 
   let rentals = server.createList('rental', 10);
 
-  rentals.forEach(rental => {
+  rentals.forEach((rental,index) => {
     // create bookings
-    let bookings = server.createList('booking', 2, {rentalId: rental.attrs.id});
-    rentals.bookings = bookings;
+    if(index !== 0){
+      let bookings = server.createList('booking', 2, {rentalId: rental.attrs.id});
+      rentals.bookings = bookings;
+    }
   });
 }

@@ -43,16 +43,22 @@
 
     <div class="field">
       <label>Email</label>
-      {{input type="email" value=newBookingChangeset.clientEmail}}
+      {{input class="email" type="email" value=newBookingChangeset.clientEmail}}
     </div>
     <div class="two fields">
       <div class="field">
         <label>From</label>
-        {{date-picker selected=newBookingChangeset.startAt onSelect=(action (mut newBookingChangeset.startAt) value="date")}}
+        {{date-picker
+          selected=newBookingChangeset.startAt
+          onSelect=(action (mut newBookingChangeset.startAt) value="date")
+          inputClass="startAt"}}
       </div>
       <div class="field">
         <label>To</label>
-        {{date-picker selected=newBookingChangeset.endAt onSelect=(action (mut newBookingChangeset.endAt) value="date")}}
+        {{date-picker
+          selected=newBookingChangeset.endAt
+          onSelect=(action (mut newBookingChangeset.endAt) value="date")
+          inputClass="endAt"}}
       </div>
     </div>
     <div class="field">

@@ -1,10 +1,10 @@
 {{#basic-dropdown as |dropdown|}}
   <input type="text"
   data-ebd-id="{{dropdown.uniqueId}}-trigger"
-  class="datepicker-demo-input form-control"
+  class="datepicker-demo-input form-control {{inputClass}}"
   onclick={{dropdown.actions.toggle}}
   value={{if selected (moment-format selected 'MM/DD/YYYY')}}
-  readonly>
+  >
 
   {{#dropdown.content class="datepicker-demo-dropdown"}}
     {{#power-calendar class="demo-calendar-small"

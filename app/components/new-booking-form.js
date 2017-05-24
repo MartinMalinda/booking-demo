@@ -17,10 +17,12 @@ export default Ember.Component.extend({
   actions: {
     submit() {
       let changeset = this.get('newBookingChangeset');
+      let snapshot = changeset.snapshot();
+      
       changeset.validate().then(result => {
         if(changeset.get('isValid')){
           changeset.save().then(changeset => {
-            this.attrs.onSuccess();
+            this.attrs.onSuccess(changeset, snapshot);
           });
         }
       });
