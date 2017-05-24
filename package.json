@@ -44,6 +44,7 @@
     "ember-devtools": "^5.1.1",
     "ember-export-application-global": "^2.0.0",
     "ember-load-initializers": "^1.0.0",
+    "ember-modal-dialog": "^2.2.0",
     "ember-moment": "^7.3.1",
     "ember-power-calendar": "^0.5.0",
     "ember-power-select": "^1.8.4",

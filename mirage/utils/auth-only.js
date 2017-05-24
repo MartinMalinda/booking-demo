@@ -5,7 +5,7 @@ import Response from 'ember-cli-mirage/response';
 export default cb => {
   return function(schema, request) {
     if(request.requestHeaders.token === token){
-      return cb(schema, request);
+      return cb.call(this, schema, request);
     } else {
       return new Response(401, { 'Content-Type': 'application/json' }, {
         errors: [{
