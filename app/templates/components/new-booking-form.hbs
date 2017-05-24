@@ -24,9 +24,14 @@
 
   <form {{action "submit" on="submit"}} class="ui form">
 
-    {{#if newBookingChangeset.isInvalid}}
+    {{#if (or newBookingChangeset.isInvalid serverErrors.length)}}
       <div class="ui error message">
         <ul>
+
+        {{#each serverErrors as |error|}}
+          <li>{{error.description}}</li>
+        {{/each}}
+
         {{#each newBookingChangeset.errors as |error|}}
           {{#each error.validation as |message|}}
             <li>{{message}}</li>

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import config from 'booking-demo/config/environment';
 import hasOverlap from './utils/has-overlap';
-import { JSONAPISerializer } from 'ember-cli-mirage';
+import Response from 'ember-cli-mirage/response';
 
 const {inflector} = Ember.Inflector;
 
@@ -40,6 +40,15 @@ export default function() {
       const rental = schema.find('rental', rentalId);
       if(!hasOverlap(rental, params, schema)){
         return schema.create(endpoint, params).save();
+      } else {
+        debugger;
+        return new Response(422, { 'Content-Type': 'application/json' }, {
+          errors: [{
+            'status': 422,
+            'title': 'Invalid date',
+            'description': 'Date range overlaps with other existing booking'
+          }]
+        });
       }
     });
 

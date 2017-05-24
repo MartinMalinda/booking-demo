@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
   dateHelp: inject.service(),
 
   newBooking: {},
+  serverErrors: [],
   BookingValidations,
 
   month: computed.alias('model.month'),
@@ -63,8 +64,9 @@ export default Ember.Controller.extend({
       // Changeset has applied changes to the newBooking object
       let newBooking = this.store.createRecord('booking', this.get('newBooking')).save().then(() => {
         this.set('newBooking', {});
-      }, error => {
-        debugger;
+        this.set('serverErrors', []);
+      }, errorResponse => {
+        this.set('serverErrors', errorResponse.errors);
       });
     }
   }
