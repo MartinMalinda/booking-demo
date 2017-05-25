@@ -12,7 +12,7 @@ test('visiting /rental-modal', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/');
-    assert.equal(find('a.rental').length, 1, 'There is currently one rental');
+    assert.equal(find('a.rental:not(.new)').length, 1, 'There is currently one rental');
     click(find('a.rental')[0]);
   });
 
@@ -42,6 +42,18 @@ test('visiting /rental-modal', function(assert) {
   });
 
   andThen(() => {
-    assert.equal(find('a.rental').length, 0, 'There are no rentals after previous deletion');
+    assert.equal(find('a.rental:not(.new)').length, 0, 'There are no rentals after previous deletion');
+    click('.rental.new');
+  });
+
+  andThen(() => {
+    assert.equal(currentURL(), `/rental/new`, 'Redirected to subroute modal after clicking rental');
+    fillIn('.rental-name', 'New name');
+    fillIn('.rental-daily-rate', 500);
+    click('.rental-submit');
+  });
+
+  andThen(() => {
+    assert.equal(find('a.rental:not(.new)').length, 1, 'There is one new rental');
   });
 });

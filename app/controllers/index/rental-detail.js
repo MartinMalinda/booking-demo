@@ -13,7 +13,9 @@ export default Ember.Controller.extend({
     },
 
     deleteRental(rental) {
-      rental.destroyRecord();
+      rental.destroyRecord().then(() => {
+        this.transitionToRoute('index.index');
+      });
     }
   }
 });

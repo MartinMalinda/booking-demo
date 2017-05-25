@@ -4,6 +4,9 @@
   width: $col-width;
   top: $row-height;
   left: $col-width;
+  padding: 10px;
+
+  cursor: pointer;
 
   border-bottom: 1px solid transparentize(grey, 0.5);
   border-right: 1px solid transparentize(grey, 0.5);
@@ -11,5 +14,9 @@
   word-break: break-word;
   background: darken(white, 10%);
 
-  transition: 2s all;
+  transition: 2s transform, 0.2s background;
+
+  &:hover {
+    background: darken(white, 20%);
+  }
 }

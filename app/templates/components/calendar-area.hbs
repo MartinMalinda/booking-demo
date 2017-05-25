@@ -1,12 +1,19 @@
-<div style={{rentalsColumnStyle}} class="rentals">
+<div class="rentals">
   <div class="rental empty"></div>
   {{#each rentals as |rental|}}
-    
-    {{#link-to "index.rental-detail" rental class="rental"}}
-      {{rental.name}} <br>
-      {{rental.dailyRate}} <small>eur / night</small>
-    {{/link-to}}
+    {{#unless rental.isDeleted}}
+      {{#link-to "index.rental-detail" rental class="rental"}}
+        {{rental.name}} <br>
+        {{rental.dailyRate}} <small>eur / night</small>
+      {{/link-to}}
+    {{/unless}}
   {{/each}}
+  
+  {{#link-to "index.rental-detail" "new" class="rental new"}}
+    <div class="ui mini icon green button">
+      <i class="icon plus"></i>
+    </div>
+  {{/link-to}}
 </div>
 <div class="calendar-wrap">
   <div class="calendar-inner">
