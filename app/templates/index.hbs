@@ -8,13 +8,4 @@
   rentals=model.rentals
   onBookingItemClick=(action "transitionToBookingDetail")}}
 
-<div class="ui fluid container">
-  {{new-booking-form
-    newBookingChangeset=(changeset newBooking BookingValidations)
-    rentals=model.rentals
-    onSuccess=(action "saveBooking")
-    serverErrors=serverErrors
-  }}
-</div>
-
 {{outlet}}

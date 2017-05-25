@@ -1,4 +1,5 @@
 import { Factory, faker } from 'ember-cli-mirage';
+import calcBookingPrice from 'booking-demo/mirage/utils/calc-booking-price';
 
 let startDate = new Date(2017, 4, 1);
 let endDate = new Date(2017, 4, 31);
@@ -18,10 +19,7 @@ export default Factory.extend({
     return faker.internet.email();
   },
 
-  price() {
-    return faker.random.number({
-      min: 0,
-      max: 1000
-    });
+  afterCreate(booking, server) {
+    booking.update('price', calcBookingPrice(booking, booking.rental));
   }
 });

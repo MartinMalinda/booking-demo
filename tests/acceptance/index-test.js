@@ -2,6 +2,7 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'booking-demo/tests/helpers/module-for-acceptance';
 import Ember from 'ember';
 import defaultScenario from 'booking-demo/mirage/scenarios/default';
+import fillInBookingForm from '../helpers/fill-in-booking-form';
 
 const {run, RSVP} = Ember;
 
@@ -12,37 +13,6 @@ const {run, RSVP} = Ember;
 // };
 
 moduleForAcceptance('Acceptance | index', {autoAuth: true});
-
-const clickDatePicker = (selector, value) => {
-
-  andThen(() => {
-    return click(selector);
-  });
-
-  andThen(() => {
-    return click(`[data-date=${value}]`);
-  });
-};
-
-const fillInBookingForm = (startAt, endAt, optionIndex) => {
-  run(() => {
-    fillIn('.email', 'malindacz@gmail.com');
-  });
-
-  clickDatePicker('.startAt', startAt);
-  clickDatePicker('.endAt', endAt);
-
-  andThen(() => {
-    run(() => {
-      selectChoose('.new-booking-form', '.ember-power-select-option', optionIndex); // Select the 4th image
-    });
-
-    run(() => {
-      click('.new-booking-form button');      
-    });
-  });
-
-}
 
 test('fill in booking form, test overlap at /index', function(assert) {
   

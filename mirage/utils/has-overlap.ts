@@ -15,6 +15,12 @@ export default (rental, params, schema) => {
     const endAt = new Date(booking.endAt);
     startAt.setHours(14);
     endAt.setHours(10);
+
+    if(params.id === booking.id) {
+      // same booking can overlap "itself"
+      return false;
+    }
+
     return areRangesOverlapping(newStartAt, newEndAt, startAt, endAt);
   });
 };

@@ -14,6 +14,7 @@ Router.map(function() {
     this.route('booking-detail', {path: '/booking/:id'});
     this.route('index', {path: '/'})
   });
+  this.route('rental');
 });
 
 export default Router;

@@ -2,5 +2,23 @@
   containerClass="booking-detail"
   translucentOverlay=true
   onClose=(action "close")}}
-  {{model.clientEmail}}
+    <div class="ui fluid container">
+    {{#new-booking-form
+      newBookingChangeset=(changeset model BookingValidations)
+      rentals=rentals
+      onSuccess=(action "saveBooking")
+      serverErrors=serverErrors
+      buttonLabel="Save"
+    }}
+
+    <div class="ui divider"></div>
+
+    <div class="ui buttons">
+      <button data-delete-button {{action "deleteBooking"}} class="ui red icon button">
+        <i class="icon trash"></i>
+      </button>
+    </div>
+    
+    {{/new-booking-form}}
+  </div>
 {{/modal-dialog}}

@@ -1,15 +1,10 @@
 import Ember from 'ember';
-import BookingValidations from '../validations/booking';
 
 const {computed, inject} = Ember;
 
 export default Ember.Controller.extend({
-
+  
   dateHelp: inject.service(),
-
-  newBooking: {},
-  serverErrors: [],
-  BookingValidations,
 
   month: computed.alias('model.month'),
   year: computed.alias('model.year'),
@@ -60,18 +55,6 @@ export default Ember.Controller.extend({
   }),
 
   actions: {
-    saveBooking(changeset, snapshot) {
-      // Changeset has applied changes to the newBooking object
-      let newBooking = this.store.createRecord('booking', this.get('newBooking'));
-      newBooking.save().then(() => {
-        this.set('newBooking', {});
-        this.set('serverErrors', []);
-      }, errorResponse => {
-        changeset.restore(snapshot);
-        changeset.pushErrors('endAt', errorResponse.errors.mapBy('description'));
-        newBooking.rollbackAttributes();
-      });
-    },
 
     transitionToBookingDetail(booking) {
       this.transitionToRoute('index.booking-detail', booking);

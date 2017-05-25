@@ -42,17 +42,40 @@ export default function() {
       return schema[plural].find(id);
     }));
 
-    // save
+    // save new
     this.post(`/${plural}`, authOnly(function(schema, request) {
-      const params = this.normalizedRequestAttrs();
-      const rentalId = params.rentalId;
+      const attrs = this.normalizedRequestAttrs();
+      const rentalId = attrs.rentalId;
       const rental = schema.find('rental', rentalId);
-      if(!hasOverlap(rental, params, schema)){
+      if(!hasOverlap(rental, attrs, schema)){
 
-        params.price = calcBookingPrice(params, rental);
+        attrs.price = calcBookingPrice(attrs, rental);
 
+        return schema.create(endpoint, attrs).save();
 
-        return schema.create(endpoint, params).save();
+      } else {
+        return new Response(422, { 'Content-Type': 'application/json' }, {
+          errors: [{
+            'status': 422,
+            'title': 'Invalid date',
+            'description': 'Date range overlaps with other existing booking'
+          }]
+        });
+      }
+    }));
+
+    // update
+    this.put(`/${plural}/:id`, authOnly((schema, request) => {
+      debugger;
+    }));
+
+    this.patch(`/${plural}/:id`, authOnly(function(schema, request) {
+      const attrs = this.normalizedRequestAttrs();
+      const booking = schema.bookings.find(attrs.id);
+      const rentalId = attrs.rentalId;
+      const rental = schema.find('rental', rentalId);
+      if(!hasOverlap(rental, attrs, schema)){
+        return schema.bookings.find(attrs.id).update(attrs);
       } else {
         return new Response(422, { 'Content-Type': 'application/json' }, {
           errors: [{

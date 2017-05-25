@@ -13,7 +13,7 @@
       </div>
       {{/if}}
     </div>
-    {{#if newBookingPrice}}
+    {{#if (or newBookingChangeset.price newBookingPrice)}}
       <div class="statistic">
         <div class="value">
          <i class="euro icon"></i> {{newBookingPrice}}
@@ -74,7 +74,9 @@
       {{/power-select}}
     </div>
     <div class="field">
-      <button class="ui green button" type="submit">Book reservation</button>
+      <button data-save-button class="ui green button" type="submit">{{buttonLabel}}</button>
     </div>
   </form>
+
+  {{yield}}
 </div>
