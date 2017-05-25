@@ -1,0 +1,36 @@
+{{#modal-dialog
+  containerClass="booking-detail"
+  translucentOverlay=true
+  onClose=(action "close")}}
+    <div class="ui fluid container">
+      {{#with (changeset model) as |changeset|}}
+      <form {{action "submit" changeset on="submit"}} class="ui form">
+        <div class="field">
+          <label>Name</label>
+          <div class="value">
+            {{input class="rental-name" value=changeset.name}}
+          </div>
+        </div>
+        <div class="field">
+          <label>Daily Rate</label>
+          <div class="value">
+            {{input type="number" class="rental-daily-rate" value=changeset.dailyRate}}
+          </div>
+        </div>
+        <div class="field">
+          <button type="submit" class="ui green button rental-submit">
+            Save
+          </button>
+        </div>
+      </form>
+      {{/with}}
+
+      <div class="ui divider"></div>
+
+      <div class="ui buttons">
+        <button {{action "deleteRental" model}} class="ui red button rental-delete"> 
+          <i class="icon trash"></i>
+        </button>
+      </div>
+    </div>
+{{/modal-dialog}}

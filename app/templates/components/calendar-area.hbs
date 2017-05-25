@@ -1,11 +1,11 @@
 <div style={{rentalsColumnStyle}} class="rentals">
-  <div class="rental"></div>
+  <div class="rental empty"></div>
   {{#each rentals as |rental|}}
     
-    <div class="rental">
+    {{#link-to "index.rental-detail" rental class="rental"}}
       {{rental.name}} <br>
       {{rental.dailyRate}} <small>eur / night</small>
-    </div>
+    {{/link-to}}
   {{/each}}
 </div>
 <div class="calendar-wrap">

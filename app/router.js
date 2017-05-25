@@ -11,8 +11,9 @@ Router.map(function() {
   this.route('login');
 
   this.route('index', {path: '/'}, function() {
-    this.route('booking-detail', {path: '/booking/:id'});
     this.route('index', {path: '/'})
+    this.route('booking-detail', {path: '/booking/:id'});
+    this.route('rental-detail', {path: '/rental/:id'});
   });
   this.route('rental');
 });
