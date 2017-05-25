@@ -6,7 +6,7 @@ moduleForAcceptance('Acceptance | rental modal', {autoAuth: true});
 test('visiting /rental-modal', function(assert) {
 
   const rental = server.create('rental');
-  let bookings = server.createList('booking', 2, {rentalId: rental.attrs.id});
+  server.createList('booking', 2, {rentalId: rental.attrs.id});
 
   visit('/');
 

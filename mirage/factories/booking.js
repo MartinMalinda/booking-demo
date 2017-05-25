@@ -19,7 +19,7 @@ export default Factory.extend({
     return faker.internet.email();
   },
 
-  afterCreate(booking, server) {
+  afterCreate(booking) {
     booking.update('price', calcBookingPrice(booking, booking.rental));
   }
 });

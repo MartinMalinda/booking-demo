@@ -49,7 +49,7 @@ export default function() {
 
   });
 
-  this.patch(`/bookings/:id`, authOnly(function(schema, request) {
+  this.patch(`/bookings/:id`, authOnly(function(schema) {
     const attrs = this.normalizedRequestAttrs();
     const rentalId = attrs.rentalId;
     const rental = schema.find('rental', rentalId);
@@ -66,13 +66,13 @@ export default function() {
     }
   }));
 
-  this.patch(`/rentals/:id`, authOnly(function(schema, request) {
+  this.patch(`/rentals/:id`, authOnly(function(schema) {
     const attrs = this.normalizedRequestAttrs();
     return schema.rentals.find(attrs.id).update(attrs);
   }));
 
     // save new booking
-  this.post(`/bookings`, authOnly(function(schema, request) {
+  this.post(`/bookings`, authOnly(function(schema) {
     const attrs = this.normalizedRequestAttrs();
     const rentalId = attrs.rentalId;
     const rental = schema.find('rental', rentalId);
@@ -94,7 +94,7 @@ export default function() {
   }));
 
     // save new rental
-  this.post(`/rentals`, authOnly(function(schema, request) {
+  this.post(`/rentals`, authOnly(function(schema) {
     const attrs = this.normalizedRequestAttrs();
     return schema.create('rental', attrs).save();
   }));

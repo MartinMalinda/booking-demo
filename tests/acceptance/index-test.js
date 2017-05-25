@@ -4,13 +4,7 @@ import Ember from 'ember';
 import defaultScenario from 'booking-demo/mirage/scenarios/default';
 import fillInBookingForm from '../helpers/fill-in-booking-form';
 
-const {run, RSVP} = Ember;
-
-// const wait = time => {
-//   return new RSVP.Promise((resolve, reject) => {
-//     setTimeout(resolve, time);
-//   });
-// };
+const {run} = Ember;
 
 moduleForAcceptance('Acceptance | index', {autoAuth: true});
 

@@ -18,7 +18,7 @@ export default Ember.Component.extend({
     submit() {
       let changeset = this.get('newBookingChangeset');
       let snapshot = changeset.snapshot();
-      changeset.validate().then(result => {
+      changeset.validate().then(() => {
         if(changeset.get('isValid')){
           this.attrs.onSuccess(changeset, snapshot);
         }
