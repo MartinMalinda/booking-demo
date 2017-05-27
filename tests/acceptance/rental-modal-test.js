@@ -3,57 +3,48 @@ import moduleForAcceptance from 'booking-demo/tests/helpers/module-for-acceptanc
 
 moduleForAcceptance('Acceptance | rental modal', {autoAuth: true});
 
-test('visiting /rental-modal', function(assert) {
+test('visiting /rental-modal', async function(assert) {
 
   const rental = server.create('rental');
   server.createList('booking', 2, {rentalId: rental.attrs.id});
 
-  visit('/');
+  await visit('/');
 
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('a.rental:not(.new)').length, 1, 'There is currently one rental');
-    click(find('a.rental')[0]);
-  });
+  assert.equal(currentURL(), '/');
+  assert.equal(find('a.rental:not(.new)').length, 1, 'There is currently one rental');
+  await click(find('a.rental')[0]);
 
-  andThen(() => {
-    assert.equal(currentURL(), `/rental/${rental.id}`, 'Redirected to subroute modal after clicking rental');
-    click('.ember-modal-overlay');
-  });
 
-  andThen(() => {
-    assert.equal(currentURL(), '/');
-    click(find('a.rental')[0]);    
-  });
+  assert.equal(currentURL(), `/rental/${rental.id}`, 'Redirected to subroute modal after clicking rental');
+  await click('.ember-modal-overlay');
 
-  andThen(() => {
-    fillIn('.rental-name', 'New name');
-    fillIn('.rental-daily-rate', 500);
-    click('.rental-submit');
-  });
 
-  andThen(() => {
-    assert.ok(find('a.rental').text().indexOf('New name') > -1, 'New name has propagated');
-    click(find('a.rental')[0]);    
-  });
+  assert.equal(currentURL(), '/');
+  await click(find('a.rental')[0]);    
 
-  andThen(() => {
-    click('.rental-delete');
-  });
 
-  andThen(() => {
-    assert.equal(find('a.rental:not(.new)').length, 0, 'There are no rentals after previous deletion');
-    click('.rental.new');
-  });
+  fillIn('.rental-name', 'New name');
+  fillIn('.rental-daily-rate', 500);
+  await click('.rental-submit');
 
-  andThen(() => {
-    assert.equal(currentURL(), `/rental/new`, 'Redirected to subroute modal after clicking rental');
-    fillIn('.rental-name', 'New name');
-    fillIn('.rental-daily-rate', 500);
-    click('.rental-submit');
-  });
 
-  andThen(() => {
-    assert.equal(find('a.rental:not(.new)').length, 1, 'There is one new rental');
-  });
+  assert.ok(find('a.rental').text().indexOf('New name') > -1, 'New name has propagated');
+  await click(find('a.rental')[0]);    
+
+
+  await click('.rental-delete');
+
+
+  assert.equal(find('a.rental:not(.new)').length, 0, 'There are no rentals after previous deletion');
+  await click('.rental.new');
+
+
+  assert.equal(currentURL(), `/rental/new`, 'Redirected to subroute modal after clicking rental');
+  fillIn('.rental-name', 'New name');
+  fillIn('.rental-daily-rate', 500);
+  await click('.rental-submit');
+
+
+  assert.equal(find('a.rental:not(.new)').length, 1, 'There is one new rental');
+  
 });

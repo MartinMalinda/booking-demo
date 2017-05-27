@@ -6,45 +6,41 @@ import fillInBookingForm from '../helpers/fill-in-booking-form';
 
 const {run} = Ember;
 
+const wait = time => {
+  return new Ember.RSVP.Promise(resolve => {
+    run.later(resolve, time);
+  });
+}
+
 moduleForAcceptance('Acceptance | index', {autoAuth: true});
 
-test('fill in booking form, test overlap at /index', function(assert) {
+test('fill in booking form, test overlap at /index', async function(assert) {
   
   defaultScenario(server);
 
-  visit('/');
+  await visit('/');
 
-  andThen(function() {
-    assert.equal(currentURL(), '/');
+  assert.equal(currentURL(), '/');
 
-    run(() => {
-      fillInBookingForm('2017-05-01', '2017-05-03', 0);
-    });
-  });
+  // run(() => {
+    await fillInBookingForm('2017-05-01', '2017-05-03', 0);
+  // });
 
-  andThen(() => {
+  assert.equal(find('.new-booking-form .error.message').length, 0, 'There is no error message after first form submission');
+  await fillInBookingForm('2017-05-01', '2017-05-03', 0);
+
+  assert.equal(find('.new-booking-form .error.message').length, 1, 'There is error message after second submission');
+
+  await fillInBookingForm('2017-05-04', '2017-05-05', 0);
+
+  // run(() => {
     assert.equal(find('.new-booking-form .error.message').length, 0, 'There is no error message after first form submission');
-    fillInBookingForm('2017-05-01', '2017-05-03', 0);
-  });
+    await fillInBookingForm('2017-05-04', '2017-05-05', 0);
 
-  andThen(() => {
-    assert.equal(find('.new-booking-form .error.message').length, 1, 'There is error message after second submission');
-  });
-
-  andThen(() => {
-    fillInBookingForm('2017-05-04', '2017-05-05', 0);
-  });
-
-  andThen(() => {
-    assert.equal(find('.new-booking-form .error.message').length, 0, 'There is no error message after first form submission');
-    fillInBookingForm('2017-05-04', '2017-05-05', 0);
-  });
-
-  andThen(() => {
     assert.equal(find('.new-booking-form .error.message').length, 1, 'There is error message after second form submission');
-  });
+  // });
 
-
+  await wait(50);
 });
 
 

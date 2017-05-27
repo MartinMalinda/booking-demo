@@ -65,13 +65,15 @@
     </div>
     <div class="field">
       <label>Rental</label>
-      {{#power-select
-        onchange=(action (mut newBookingChangeset.rental))
-        selected=newBookingChangeset.rental
-        searchField="name"
-        options=rentals as |rental|}}
-        {{rental.name}} ({{rental.dailyRate}} EUR / night)
-      {{/power-select}}
+      {{#x-select
+        value=newBookingChangeset.rental
+        action=(action (mut newBookingChangeset.rental)) as |xs|}}
+        {{#each rentals as |rental|}}
+          {{#xs.option value=rental}}{{rental.name}} ({{rental.dailyRate}} EUR / night){{/xs.option}}
+        {{/each}}
+        {{#xs.option value=bob}}Bob Newhart{{/xs.option}}
+      {{/x-select}}
+
     </div>
     <div class="field">
       <button data-save-button class="ui green button" type="submit">{{buttonLabel}}</button>
